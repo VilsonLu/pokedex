@@ -1,10 +1,17 @@
 import React, { ReactElement } from 'react';
 
-const Pokecard: React.FunctionComponent = (): ReactElement => {
+interface IPokecardProps {
+    name: string;
+    type: string;
+    description: string;
+}
+
+const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps): ReactElement => {
     return (
         <div>
-            <h3>Pikachu</h3>
-            <h2>Electric-Type</h2>
+            <h2>{props.name}</h2>
+            <h3>{props.type}</h3>
+            <p>{props.description}</p>
         </div>
     );
 }
