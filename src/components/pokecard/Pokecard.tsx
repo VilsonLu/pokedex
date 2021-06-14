@@ -42,13 +42,13 @@ const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps
                         {props.type}
                     </Typography>
                 </CardContent>
+
+                <CardActions>
+                    <Button size="small" color="primary" href={props.description}>
+                        Learn More
+                    </Button>
+                </CardActions>
            </CardActionArea>
-          
-            <CardActions>
-                <Button size="small" color="primary" href={props.description}>
-                    Learn More
-                </Button>
-            </CardActions>
        </Card>
     );
 }
