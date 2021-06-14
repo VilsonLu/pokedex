@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import HelloWorld from './components/HelloWorld';
+import Pokedex from './pages/Pokedex';
 
-render(<HelloWorld />, document.getElementById('root'));
+render(<Pokedex />, document.getElementById('root'));
