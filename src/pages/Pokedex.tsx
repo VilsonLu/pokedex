@@ -4,29 +4,6 @@ import PokemonAPI from "../api/PokemonAPI";
 
 import "./Pokedex.module.scss";
 
-const pokemonList = [
-  {
-    name: "Pikachu",
-    type: "Electric",
-    description: "test"
-  },
-  {
-    name: "Gengar",
-    type: "Ghost",
-    description: "test"
-  },
-  {
-    name: "Squirtle",
-    type: "Water",
-    description: "test"
-  },
-  {
-    name: "Charmander",
-    type: "Fire",
-    description: "test"
-  },
-];
-
 interface IPokemon {
   name: string,
   url: string
