@@ -1,17 +1,13 @@
 import React, { ReactElement, useState, useEffect } from "react";
+import Pokemon from "../ts/Pokemon";
 import Pokecard from "../components/pokecard/Pokecard";
 import PokemonAPI from "../api/PokemonAPI";
 
 import "./Pokedex.module.scss";
 
-interface IPokemon {
-  name: string,
-  url: string
-}
-
 const Pokedex: React.FunctionComponent = (): ReactElement => {
 
-  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     PokemonAPI.getPokemons().then((response) => {
