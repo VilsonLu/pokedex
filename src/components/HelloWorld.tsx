@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './HelloWorld.module.scss';
 
-const HelloWorld = () => {
+const HelloWorld: React.FunctionComponent = (): ReactElement  => {
   return (
       <h3>Hello World</h3>
   );
