@@ -1,9 +1,22 @@
 @import '../assets/scss/colors.module';
 
+
+body {
+    background-color: $color-grey;
+}
+
 h1 {
     color: $color-yellow;
 }
 
+h2 {
+    text-transform: capitalize;
+}
+
 h3 {
     color: $color-blue;
+}
+
+p {
+    text-transform: capitalize;
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,46 +8,67 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import Pokemon from '../../ts/Pokemon';
+import PokemonAPI from '../../api/PokemonAPI';
+
+
 interface IPokecardProps {
     name: string;
-    type: string;
-    description: string;
+    url: string;
 }
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 275,
+      maxWidth: 250,
     },
     media: {
-      height: 140,
+      width: 250,
+      height: 250
     },
   });
 
 const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps): ReactElement => {
     const classes = useStyles();
+
+    const [pokemonDetails, setPokemonDetails] = useState<Pokemon>(Object);
+
+    useEffect(() => {
+        PokemonAPI.getPokemon(props.url).then((response) => {
+            return setPokemonDetails(response);
+        });
+    });
+
     return (
        <Card className={classes.root}>
            <CardActionArea>
-               <CardMedia
-                    className={classes.media}
-                    image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-                    title={props.name}
-               />
+                {
+                    pokemonDetails.sprites ?
+                        <CardMedia
+                            className={classes.media}
+                            image={pokemonDetails.sprites?.front_default}
+                            title={props.name}
+                        />
+                        : 
+                        <></>
+                }
+
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.name}
                     </Typography>
 
                     <Typography gutterBottom variant="body2" component="p">
-                        {props.type}
+                        Base Experience: {pokemonDetails.base_experience}
                     </Typography>
+
                 </CardContent>
 
                 <CardActions>
-                    <Button size="small" color="primary" href={props.description}>
+                    <Button size="small" color="primary" href={props.url}>
                         Learn More
                     </Button>
                 </CardActions>
+
            </CardActionArea>
        </Card>
     );

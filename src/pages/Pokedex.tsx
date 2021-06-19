@@ -1,5 +1,4 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import Pokemon from "../ts/Pokemon";
 import Pokecard from "../components/pokecard/Pokecard";
 import PokemonAPI from "../api/PokemonAPI";
 
@@ -7,11 +6,11 @@ import "./Pokedex.module.scss";
 
 const Pokedex: React.FunctionComponent = (): ReactElement => {
 
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<any[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    PokemonAPI.getPokemons().then((response) => {
+    PokemonAPI.getPokemonList().then((response) => {
       setPokemons(response.data.results);
       setLoading(false);
     });
@@ -24,7 +23,7 @@ const Pokedex: React.FunctionComponent = (): ReactElement => {
       {
         isLoading ? <p>Loading...</p> :
         pokemons.map((x) => {
-          return <Pokecard key={x.name} name={x.name} type={x.url} description={x.url}/>;
+          return <Pokecard key={x.name} name={x.name} url={x.url}/>;
         })
       }
     </div>
