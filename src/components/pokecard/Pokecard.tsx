@@ -19,11 +19,11 @@ interface IPokecardProps {
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 250,
+      maxWidth: 325,
     },
     media: {
-      width: 250,
-      height: 250
+      width: 300,
+      height: 300
     },
   });
 
