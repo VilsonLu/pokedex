@@ -1,9 +1,40 @@
-import React, { ReactElement } from 'react';
-import './Pokedex.module.scss';
+import React, { ReactElement, useState, useEffect } from "react";
 
-const Pokedex: React.FunctionComponent = (): ReactElement  => {
+import Grid from "@material-ui/core/Grid";
+import Pokecard from "../components/pokecard/Pokecard";
+import PokemonAPI from "../api/PokemonAPI";
+
+import "./Pokedex.module.scss";
+
+const Pokedex: React.FunctionComponent = (): ReactElement => {
+  const [pokemons, setPokemons] = useState<any[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    PokemonAPI.getPokemonList().then((response) => {
+      setPokemons(response.data.results);
+      setLoading(false);
+    });
+  });
+
   return (
-      <h3>Hello World</h3>
+    <div>
+      <h1>Welcome to Pokedex</h1>
+
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <Grid container spacing={1}>
+          {pokemons.map((x) => {
+            return (
+              <Grid key={x.name} item xs={12} sm={6} md={3} lg={2} xl={2}>
+                <Pokecard key={x.name} name={x.name} url={x.url} />
+              </Grid>
+            );
+          })}
+        </Grid>
+      )}
+    </div>
   );
 };
 

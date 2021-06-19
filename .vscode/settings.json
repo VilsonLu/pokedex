@@ -1,6 +1,13 @@
 {
     "cSpell.words": [
-        "navyblue"
+        "Gengar",
+        "Pikachu",
+        "Pokecard",
+        "Squirtle",
+        "charmander",
+        "navyblue",
+        "pokecards",
+        "pokemons"
     ],
     "eslint.options": {
         "ignorePattern": "webpack.config.js",
