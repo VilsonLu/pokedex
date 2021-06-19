@@ -1,9 +1,8 @@
 import React, { ReactElement, useState, useEffect } from "react";
-
 import Grid from "@material-ui/core/Grid";
+import Typography from '@material-ui/core/Typography';
 import Pokecard from "../components/pokecard/Pokecard";
 import PokemonAPI from "../api/PokemonAPI";
-
 import "./Pokedex.module.scss";
 
 const Pokedex: React.FunctionComponent = (): ReactElement => {
@@ -21,7 +20,9 @@ const Pokedex: React.FunctionComponent = (): ReactElement => {
 
   return (
     <div>
-      <h1>Welcome to Pokedex</h1>
+      <Typography gutterBottom variant="h1" component="h1">
+        Pokedex
+      </Typography>
 
       {isLoading ? (
         <p>Loading...</p>
