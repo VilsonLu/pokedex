@@ -9,12 +9,14 @@ import "./Pokedex.module.scss";
 const Pokedex: React.FunctionComponent = (): ReactElement => {
   const [pokemons, setPokemons] = useState<any[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
-
+  
   useEffect(() => {
-    PokemonAPI.getPokemonList().then((response) => {
-      setPokemons(response.data.results);
-      setLoading(false);
-    });
+    if(pokemons && pokemons.length == 0) {
+      PokemonAPI.getPokemonList().then((response) => {
+        setPokemons(response.data.results);
+        setLoading(false);
+      });
+    } 
   });
 
   return (
@@ -24,7 +26,7 @@ const Pokedex: React.FunctionComponent = (): ReactElement => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           {pokemons.map((x) => {
             return (
               <Grid key={x.name} item xs={12} sm={6} md={3} lg={2} xl={2}>
