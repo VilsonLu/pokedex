@@ -10,6 +10,6 @@
         "pokemons"
     ],
     "eslint.options": {
-        "ignorePattern": "webpack.config.js",
+        "ignorePattern": "webpack.*.js",
     }
 }
