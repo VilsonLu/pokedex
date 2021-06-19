@@ -3,13 +3,17 @@
         "Gengar",
         "Pikachu",
         "Pokecard",
+        "Pokegrid",
+        "Pokeloader",
         "Squirtle",
         "charmander",
         "navyblue",
+        "pokeball",
         "pokecards",
-        "pokemons"
+        "pokemons",
+        "postbuild"
     ],
     "eslint.options": {
-        "ignorePattern": "webpack.config.js",
+        "ignorePattern": ["webpack.*.js", "server.js"],
     }
 }

@@ -1,38 +1,36 @@
 import React, { ReactElement, useState, useEffect } from "react";
-
-import Grid from "@material-ui/core/Grid";
-import Pokecard from "../components/pokecard/Pokecard";
+import Typography from '@material-ui/core/Typography';
 import PokemonAPI from "../api/PokemonAPI";
-
-import "./Pokedex.module.scss";
+import SearchResult from "../ts/SearchResult";
+import Pokegrid from '../components/pokegrid/Pokegrid';
+import Pokeloader from '../components/pokeloader/Pokeloader';
+import './Pokedex.module.scss';
 
 const Pokedex: React.FunctionComponent = (): ReactElement => {
-  const [pokemons, setPokemons] = useState<any[]>([]);
+  const [pokemons, setPokemons] = useState<SearchResult[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
-
+  
   useEffect(() => {
-    PokemonAPI.getPokemonList().then((response) => {
-      setPokemons(response.data.results);
-      setLoading(false);
-    });
+    if(pokemons && pokemons.length == 0) {
+      PokemonAPI.getPokemonList().then((response) => {
+        setPokemons(response);
+        setLoading(false);
+      });
+    } 
   });
 
   return (
     <div>
-      <h1>Welcome to Pokedex</h1>
+      <Typography gutterBottom variant="h1" component="h1">
+        Pokedex
+      </Typography>
+
+
 
       {isLoading ? (
-        <p>Loading...</p>
+        <Pokeloader showLoader={isLoading} />
       ) : (
-        <Grid container spacing={1}>
-          {pokemons.map((x) => {
-            return (
-              <Grid key={x.name} item xs={12} sm={6} md={3} lg={2} xl={2}>
-                <Pokecard key={x.name} name={x.name} url={x.url} />
-              </Grid>
-            );
-          })}
-        </Grid>
+        <Pokegrid pokemonResults={pokemons}></Pokegrid>
       )}
     </div>
   );

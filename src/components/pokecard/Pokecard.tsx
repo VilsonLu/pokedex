@@ -61,6 +61,14 @@ const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps
                         Base Experience: {pokemonDetails.base_experience}
                     </Typography>
 
+                    <Typography gutterBottom variant="body2" component="p">
+                        Weight: {pokemonDetails.weight} hg
+                    </Typography>
+
+                    <Typography gutterBottom variant="body2" component="p">
+                        Height: {pokemonDetails.height} dm
+                    </Typography>
+
                 </CardContent>
 
                 <CardActions>
