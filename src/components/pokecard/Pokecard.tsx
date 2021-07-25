@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 import Pokemon from '../../ts/Pokemon';
 import PokemonAPI from '../../api/PokemonAPI';
 
@@ -19,21 +18,24 @@ interface IPokecardProps {
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 325,
+      maxWidth: 300
     },
     media: {
       width: 300,
-      height: 300
+      height: 300,
+      backgroundColor: 'blue'
     },
-  });
+});
 
 const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps): ReactElement => {
     const classes = useStyles();
 
+    const pokemonAPI = new PokemonAPI();
+
     const [pokemonDetails, setPokemonDetails] = useState<Pokemon>(Object);
 
     useEffect(() => {
-        PokemonAPI.getPokemon(props.url).then((response) => {
+        pokemonAPI.getPokemon(props.url).then((response) => {
             return setPokemonDetails(response);
         });
     });
