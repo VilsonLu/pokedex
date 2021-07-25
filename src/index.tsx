@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import PokemonAPI from './api/PokemonAPI';
+import { PokemonAPI, MockPokemonAPI } from './api/PokemonAPI';
 import Pokedex from './pages/Pokedex';
 
 

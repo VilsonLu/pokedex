@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Pokemon from '../../ts/Pokemon';
-import PokemonAPI from '../../api/PokemonAPI';
+import { PokemonAPI } from '../../api/PokemonAPI';
 
 
 interface IPokecardProps {
@@ -28,27 +28,29 @@ const useStyles = makeStyles({
 });
 
 const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps): ReactElement => {
-    const classes = useStyles();
 
+    const classes = useStyles();
+    const [pokemonDetails, setPokemonDetails] = useState<Pokemon>(Object);
     const pokemonAPI = new PokemonAPI();
 
-    const [pokemonDetails, setPokemonDetails] = useState<Pokemon>(Object);
+    const { name, url } = props
+    const { weight, height, base_experience, sprites } = pokemonDetails;
 
     useEffect(() => {
-        pokemonAPI.getPokemon(props.url).then((response) => {
+        pokemonAPI.getPokemon(url).then((response) => {
             return setPokemonDetails(response);
         });
     });
-
+    
     return (
        <Card className={classes.root}>
            <CardActionArea>
                 {
-                    pokemonDetails.sprites ?
+                    sprites ?
                         <CardMedia
                             className={classes.media}
-                            image={pokemonDetails.sprites?.front_default}
-                            title={props.name}
+                            image={sprites?.front_default}
+                            title={name}
                         />
                         : 
                         <></>
@@ -56,25 +58,25 @@ const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps
 
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {props.name}
+                        {name}
                     </Typography>
 
                     <Typography gutterBottom variant="body2" component="p">
-                        Base Experience: {pokemonDetails.base_experience}
+                        Base Experience: {base_experience}
                     </Typography>
 
                     <Typography gutterBottom variant="body2" component="p">
-                        Weight: {pokemonDetails.weight} hg
+                        Weight: {weight} hg
                     </Typography>
 
                     <Typography gutterBottom variant="body2" component="p">
-                        Height: {pokemonDetails.height} dm
+                        Height: {height} dm
                     </Typography>
 
                 </CardContent>
 
                 <CardActions>
-                    <Button size="small" color="primary" href={props.url}>
+                    <Button size="small" color="primary" href={url}>
                         Learn More
                     </Button>
                 </CardActions>
