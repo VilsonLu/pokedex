@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Pokemon from '../../ts/Pokemon';
+import { PokemonTypeColor, GetPokemonTypeColor } from '../../ts/helper/PokemonTypeColor';
 import { PokemonAPI } from '../../api/PokemonAPI';
 
 
@@ -16,32 +17,34 @@ interface IPokecardProps {
     url: string;
 }
 
-const useStyles = makeStyles({
-    root: {
-      maxWidth: 300
-    },
-    media: {
-      width: 300,
-      height: 300,
-      backgroundColor: 'blue'
-    },
-});
-
 const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps): ReactElement => {
 
-    const classes = useStyles();
     const [pokemonDetails, setPokemonDetails] = useState<Pokemon>(Object);
     const pokemonAPI = new PokemonAPI();
 
     const { name, url } = props
-    const { weight, height, base_experience, sprites } = pokemonDetails;
+    const { weight, height, base_experience, sprites, types } = pokemonDetails;
 
     useEffect(() => {
         pokemonAPI.getPokemon(url).then((response) => {
             return setPokemonDetails(response);
         });
     });
-    
+
+    const useStyles = makeStyles({
+        root: {
+          'width': '100%'
+        },
+        media: {
+          'width': '100%',
+          height: 300,
+          backgroundSize: 'contain',
+          backgroundColor: types ? GetPokemonTypeColor(types[0].type.name) : PokemonTypeColor.other
+        },
+    });
+
+    const classes = useStyles();
+ 
     return (
        <Card className={classes.root}>
            <CardActionArea>
@@ -71,6 +74,10 @@ const Pokecard: React.FunctionComponent<IPokecardProps> = (props: IPokecardProps
 
                     <Typography gutterBottom variant="body2" component="p">
                         Height: {height} dm
+                    </Typography>
+
+                    <Typography gutterBottom variant="body2" component="p">
+                        Type: {pokemonDetails.types ? `${pokemonDetails.types[0].type.name}` : 'N/A'}
                     </Typography>
 
                 </CardContent>
